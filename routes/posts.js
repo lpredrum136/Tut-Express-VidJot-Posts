@@ -5,8 +5,9 @@ const router = express.Router()
 const Post = require('../models/Post')
 
 // Hien thi tat ca cac post
-router.get('/', (req, res) => {
-  res.send('Day la tat ca cac post')
+router.get('/', async (req, res) => {
+  const posts = await Post.find().lean().sort({ date: -1 })
+  res.render('posts/index', { posts })
 })
 
 // Hien thi form tao post moi
@@ -15,9 +16,23 @@ router.get('/add', (req, res) => {
 })
 
 // Tao post moi
-router.post('/', (req, res) => {
-  console.log(req.body)
-  res.send('ok')
+router.post('/', async (req, res) => {
+  const { title, text } = req.body
+
+  let errors = []
+
+  if (!title) errors.push({ msg: 'Title required' })
+  if (!text) errors.push({ msg: 'Text required' })
+  if (errors.length > 0) res.render('posts/add', { errors, title, text })
+  else {
+    const newPostData = { title, text }
+    const newPost = new Post(newPostData)
+    await newPost.save()
+    res.redirect('/posts')
+  }
+
+  /* console.log(req.body)
+  res.send('ok') */
 })
 
 module.exports = router
