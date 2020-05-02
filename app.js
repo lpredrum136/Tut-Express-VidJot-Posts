@@ -1,5 +1,6 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
+const bodyParser = require('body-parser')
 const connectDB = require('./config/db')
 
 // Import routes
@@ -11,6 +12,10 @@ const app = express()
 // Khoi dong Handlebars middleware
 app.engine('handlebars', exphbs())
 app.set('view engine', 'handlebars')
+
+// Khoi dong bodyParser middleware
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 // Khoi dong express middleware
 app.use(express.json())

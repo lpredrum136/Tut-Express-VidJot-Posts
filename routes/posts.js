@@ -9,9 +9,15 @@ router.get('/', (req, res) => {
   res.send('Day la tat ca cac post')
 })
 
+// Hien thi form tao post moi
+router.get('/add', (req, res) => {
+  res.render('posts/add')
+})
+
 // Tao post moi
-router.post('/', async (req, res) => {
-  const post = new Post()
+router.post('/', (req, res) => {
+  console.log(req.body)
+  res.send('ok')
 })
 
 module.exports = router
