@@ -1,6 +1,7 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 const connectDB = require('./config/db')
 
 // Import routes
@@ -16,6 +17,9 @@ app.set('view engine', 'handlebars')
 // Khoi dong bodyParser middleware
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+
+// Method override middleware
+app.use(methodOverride('_method'))
 
 // Khoi dong express middleware
 app.use(express.json())

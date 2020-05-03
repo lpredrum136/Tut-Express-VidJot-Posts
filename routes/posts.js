@@ -35,4 +35,22 @@ router.post('/', async (req, res) => {
   res.send('ok') */
 })
 
+// Chinh sua post
+router.get('/edit/:id', async (req, res) => {
+  const post = await Post.findOne({ _id: req.params.id }).lean()
+  res.render('posts/edit', { post })
+})
+
+// Cap nhat post vao co so du lieu
+router.put('/:id', async (req, res) => {
+  const { title, text } = req.body
+  await Post.findOneAndUpdate(
+    {
+      _id: req.params.id
+    },
+    { title, text }
+  )
+  res.redirect('/posts')
+})
+
 module.exports = router
