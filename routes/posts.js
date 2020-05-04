@@ -53,4 +53,10 @@ router.put('/:id', async (req, res) => {
   res.redirect('/posts')
 })
 
+// Xoa post
+router.delete('/:id', async (req, res) => {
+  await Post.findOneAndRemove({ _id: req.params.id })
+  res.redirect('/posts')
+})
+
 module.exports = router
