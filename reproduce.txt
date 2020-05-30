@@ -1,0 +1,59 @@
+len cloud.mongodb.com tao tai khoan
+- create project 
+- build cluster
+- connect stuff
+
+npm i config
+- tao thu muc config. NHO AN mongoURI truoc.
+- dua vao app.js 
+-------------------------------------
+tao thu muc models/Post.js
+
+tao thu muc routes/posts.js
+- thu router.post() voi res.send() de thu 
+
+dua router do vao app.js
+-------------------------------------
+Tao folder views
+- Thu muc layouts
+  + main.handlebars: bootstrap 4 get started de lay du jquery popper cac kieu
+
+- O thu muc views/
+  + tao file index.handlebars: p day la index
+
+- Vao app.js:
+  + Mang handlebars vao
+  + Tao route app.get('/') de render index.handlebars
+
+- Quay lai views
+  + Them partials/navbar cho dep
+  + Mang navbar vao main.handlebars
+  + Tao not about.handlebars cho xong
+  + Dua vao app.js
+------------------------------------------
+Tao folder views/posts
+- Tao add.handlebars
+- Vao posts.js de handle khi user muon tao post moi (GET)
+- npm i body-parser va chuan bi middleware trong app.js
+- Vao posts.js de handle nhan data khi tao post moi (POST), thu bang cach console.log(req.body) thoi
+----------------------------------------
+Handle POST request, save vao db va redirect ve posts
+Handle GET all posts
+Tao views/posts/index
+
+----------------------------
+Handle EDIT PUT request
+GET to 'edit/:id'
+tao edit.handlebars
+HANDLE PUT de thay doi post
+nho dua method override vao app.js
+-----------------------------
+Handle DELETE trong post.js
+Them jumbotron cho index view
+-----------------------------
+Deploy:
+them process.env.port vao app.js
+them start script vao package.json
+heroku login
+heroku create
+heroku apps:rename tut-posts
